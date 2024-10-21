@@ -31,12 +31,12 @@ public class AuthenticationController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<String> register(@RequestBody RegisterUserDto registerUserDto) throws InterruptedException, JsonProcessingException, BadRequestException {
+    public ResponseEntity<Object> register(@RequestBody RegisterUserDto registerUserDto) throws InterruptedException, JsonProcessingException, BadRequestException {
         return authenticationService.signup(registerUserDto);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponseDto> authenticate(@RequestBody LoginUserDto loginUserDto) throws JsonProcessingException {
+    public ResponseEntity<Object> authenticate(@RequestBody LoginUserDto loginUserDto) throws JsonProcessingException {
         return authenticationService.authenticate(loginUserDto);
     }
 

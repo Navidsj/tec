@@ -32,7 +32,7 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable).
                 authorizeHttpRequests(req -> {
-                            req.requestMatchers("/signup","/login","/new/driver")
+                            req.requestMatchers("/signup","/login","/captcha")
                                     .permitAll();
                             req.anyRequest()
                                     .authenticated();

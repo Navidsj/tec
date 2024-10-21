@@ -4,23 +4,23 @@ package com.example.tec.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import net.bytebuddy.asm.MemberSubstitution;
-import org.checkerframework.checker.index.qual.Positive;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Table(name = "users")
 @Data
 public class User implements UserDetails {
 
+//    @SequenceGenerator(name = "UserIdSeqGenerator", allocationSize = 1, sequenceName = "UserIdSeq")
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "UserIdSeqGenerator")
     @Id
-    @SequenceGenerator(name = "UserIdSeqGenerator", allocationSize = 1, sequenceName = "UserIdSeq")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "UserIdSeqGenerator")
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     @Column(nullable = false,length = 20)
     String name;

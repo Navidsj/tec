@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 public class ValueCheck {
 
 
-    public static ResponseEntity<String> checkUser(String name, String email,String phoneNumber, String password){
+    public static ResponseEntity<Object> checkUser(String name, String email,String phoneNumber, String password){
 
         if(checkPhoneNumber(phoneNumber) != null){
             return ResponseEntity.badRequest().body("Phone number is incorrect");

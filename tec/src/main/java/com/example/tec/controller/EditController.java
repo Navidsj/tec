@@ -3,19 +3,10 @@ package com.example.tec.controller;
 
 import com.example.tec.Service.EditService;
 import com.example.tec.Service.JwtService;
-import com.example.tec.mapper.MapToUser;
 import com.example.tec.model.User;
 import com.example.tec.repository.UserRepository;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.Getter;
-import org.mapstruct.control.MappingControl;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @RestController
 public class EditController {
@@ -32,7 +23,7 @@ public class EditController {
     }
 
     @PutMapping("/edit")
-    public ResponseEntity<String> sayHello(@RequestHeader("Authorization") String header, @RequestBody String body) throws Exception {
+    public ResponseEntity<String> edit(@RequestHeader("Authorization") String header, @RequestBody String body) throws Exception {
 
         String token = header.substring(7);
         User currentUser = userRepository.findByEmail(jwtService.extractUsername(token)).get();

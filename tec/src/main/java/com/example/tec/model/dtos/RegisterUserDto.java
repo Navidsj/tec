@@ -9,5 +9,5 @@ public class RegisterUserDto {
     private String email;
     private String phoneNumber;
     private String password;
-
+    private int captcha;
 }

@@ -1,6 +1,6 @@
 package com.example.tec.Service;
 
-import com.example.tec.mapper.MapToUser;
+import com.example.tec.mapper.Converter;
 import com.example.tec.model.User;
 import com.example.tec.repository.UserRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
+import java.util.UUID;
 
 @Service
 public class EditService {
@@ -19,19 +20,19 @@ public class EditService {
         this.userRepository = userRepository;
     }
 
-    public ResponseEntity<String> editUser(long userId,String body) throws JsonProcessingException {
+    public ResponseEntity<String> editUser(UUID userId, String body) throws JsonProcessingException {
 
         ObjectMapper objectMapper = new ObjectMapper();
 
 
 
         Map<String,Object> edited = objectMapper.readValue(body,Map.class);
-        Map<String,Object> current = objectMapper.convertValue(userRepository.findById(userId).get(),Map.class);
+        Map<String,Object> current = objectMapper.convertValue(userRepository.findById(userId),Map.class);
 
         for (Map.Entry<String, Object> entry : edited.entrySet()) {
             String key = entry.getKey();
             Object value = entry.getValue();
-            if(key.equals("admin") || key.equals("Id") || key.equals("email"))
+            if(key.equals("admin") || key.equals("userId") || key.equals("email"))
                 continue;
             else{
                 if(current.containsKey(key)){
@@ -40,8 +41,8 @@ public class EditService {
             }
         }
 
-        User newUser = MapToUser.convertMapToUser(current);
-
+        User newUser = Converter.convertMapToUser(current);
+        newUser.setId(userId);
         userRepository.save(newUser);
 
 
