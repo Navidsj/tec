@@ -6,6 +6,7 @@ import com.example.tec.model.dtos.LoginResponseDto;
 import com.example.tec.model.dtos.LoginUserDto;
 import com.example.tec.model.dtos.RegisterUserDto;
 import com.example.tec.repository.UserRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -48,7 +49,7 @@ public class AuthenticationService {
         return ResponseEntity.ok(user.getName() + " jan account shoma sakhte shod.");
     }
 
-    public ResponseEntity<LoginResponseDto> authenticate(LoginUserDto input){
+    public ResponseEntity<LoginResponseDto> authenticate(LoginUserDto input) throws JsonProcessingException {
 
         if(userRepository.findByEmail(input.getEmail()).isPresent() && passwordEncoder.matches(input.getPassword(), userRepository.findByEmail(input.getEmail()).get().getPassword())) {
 
