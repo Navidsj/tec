@@ -8,6 +8,9 @@ import com.example.tec.repository.UserRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.awt.*;
+import java.awt.image.BufferedImage;
+
 @RestController
 public class EditController {
 
