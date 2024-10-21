@@ -1,0 +1,48 @@
+#spring.application.name=tec
+
+
+spring:
+  application:
+    name: tec
+  datasource:
+    url: jdbc:postgresql://localhost:5432/divarDb
+    username: postgres
+    password: 12345
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        format_sql: true
+    database-platform:
+      org:
+        hibernate:
+          spatial:
+            dialect:
+              postgis: PostgisDialect
+
+
+secret:
+  key: 3cfa76ef14937c1c0ea519f8fc057a80fcd04a7420f8e8bcd0a7567c272e007b
+
+rabbitmq:
+  exchange:
+    name: new-exchange
+  reporter:
+    queue:
+      name: new-queue-reporter
+    routing:
+      key:
+        name: report-routing-key
+  message:
+    queue:
+      name: new-queue-message
+    routing:
+      key:
+        name: message-routing-key
+
+logging:
+  level:
+    org:
+      springframework:
+        security: trace
